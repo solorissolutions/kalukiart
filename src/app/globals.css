@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F4F1EA;
+  --foreground: #2F2F2F;
+  --umbra: #2B241E;
+  --ochre: #BC6C25;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #2B241E;
+    --foreground: #F4F1EA;
+    --umbra: #2B241E;
+    --ochre: #BC6C25;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ochre);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .paper-grain {
+    position: relative;
+  }
+
+  .paper-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  .interactive {
+    transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
+    will-change: transform, box-shadow;
+  }
+
+  .interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(47, 47, 47, 0.12);
+  }
+}
